@@ -1,0 +1,3 @@
+1. Change color of a block after hit;
+2. Start angle depends on velocity of a platform;
+3. Angular aim (only in stable position);
