@@ -2,48 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallScript : MonoBehaviour {
-
-    private bool ballIsActive;
+public class BallScript : MonoBehaviour
+{
+	private bool ballIsActive;
+	private Vector2 ballInitialForce;
     private Vector3 ballPosition;
-    private Vector2 ballInitialForce;
+	private Rigidbody2D ballRigidbody;
     public GameObject playerObject;
 
-    // Use this for initialization
-    void Start () {
+    void Start()
+	{
         ballInitialForce = new Vector2(100.0f, 300.0f);
-
-        // переводим в неактивное состояние
         ballIsActive = false;
-
-        // запоминаем положение
+		ballRigidbody = GetComponent<Rigidbody2D>();
         ballPosition = transform.position;
     }
-	
-	// Update is called once per frame
-    private void Update()
+
+    void Update()
     {
-        // проверка нажатия на пробел
         if (Input.GetButtonDown("Jump"))
         {
-            // проверка состояния
             if (!ballIsActive)
             {
-                // сброс всех сил
-                //GetComponent<Rigidbody2D>().isKinematic = false;
-                // применим силу
-                GetComponent<Rigidbody2D>().AddForce(ballInitialForce);
-                // зададим активное состояние
+				ballRigidbody.velocity = new Vector2(0f, 0f);
+				ballRigidbody.AddForce(ballInitialForce);
                 ballIsActive = !ballIsActive;
             }
         }
 
         if (!ballIsActive && playerObject != null)
         {
-            // задаем новую позицию шарика
             ballPosition.x = playerObject.transform.position.x;
-
-            // устанавливаем позицию шара
             transform.position = ballPosition;
         }
 
@@ -53,8 +42,6 @@ public class BallScript : MonoBehaviour {
             ballPosition.x = playerObject.transform.position.x;
             ballPosition.y = -3.84f;
             transform.position = ballPosition;
-
-            //GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 }
