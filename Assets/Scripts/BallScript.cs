@@ -42,6 +42,7 @@ public class BallScript : MonoBehaviour
             ballPosition.x = playerObject.transform.position.x;
             ballPosition.y = -3.84f;
             transform.position = ballPosition;
+			playerObject.SendMessage("TakeLife");
         }
     }
 }
