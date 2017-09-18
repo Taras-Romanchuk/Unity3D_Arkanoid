@@ -9,6 +9,7 @@ public class BallScript : MonoBehaviour
     private Vector3 ballPosition;
 	private Rigidbody2D ballRigidbody;
     public GameObject playerObject;
+	public AudioClip hitSound;
 
     void Start()
 	{
@@ -45,4 +46,12 @@ public class BallScript : MonoBehaviour
 			playerObject.SendMessage("TakeLife");
         }
     }
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (ballIsActive)
+		{
+			GetComponent<AudioSource>().PlayOneShot(hitSound, 1.0F);
+		}
+	}
 }

@@ -9,6 +9,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3 playerPosition;
 	private int playerLives;
 	private int playerPoints;
+	public AudioClip pointSound;
+	public AudioClip lifeSound;
 
     void Start()
 	{
@@ -37,20 +39,44 @@ public class PlayerScript : MonoBehaviour
         }
 
         transform.position = playerPosition;
+
+		WinLose();
     }
 
 	void AddPoints(int points)
 	{
 		playerPoints += points;
+		GetComponent<AudioSource>().PlayOneShot(pointSound, 1.0F);
 	}
 
 	void TakeLife()
 	{
 		playerLives--;
+		GetComponent<AudioSource>().PlayOneShot(lifeSound, 1.0F);
 	}
 
 	void OnGUI()
 	{
 		GUI.Label(new Rect(5.0f,3.0f,200.0f,200.0f),"Live's: " + playerLives + "  Score: " + playerPoints);
+	}
+
+	void WinLose()
+	{		
+		if (playerLives == 0)
+		{
+			Application.LoadLevel("Level1");        
+		}
+
+		if ((GameObject.FindGameObjectsWithTag ("Block")).Length == 0)
+		{
+			if (Application.loadedLevelName == "Level1")
+			{
+				Application.LoadLevel("Level2");
+			}
+			else
+			{
+				Application.Quit();
+			}
+		}
 	}
 }

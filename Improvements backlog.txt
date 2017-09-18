@@ -1,3 +1,14 @@
+Desktop:
 1. Change color of a block after hit;
 2. Start angle depends on velocity of a platform;
 3. Angular aim (only in stable position);
+
+Bugs:
+1. Incorrect pushing away angle;
+2. The ball is slowing down and going near the wall after long standing close to the wall;
+
+Web:
+1. Make a menu;
+2. Store results per player;
+3. Accumulate points and make an ability to buy new skins for ball, platform or backgrounds etc;
+4. Music and sound volume controller;
